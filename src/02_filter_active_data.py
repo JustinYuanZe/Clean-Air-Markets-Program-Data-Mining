@@ -1,9 +1,24 @@
 import pandas as pd
 import os
+import re
 
 def analyze_and_filter():
-    years = ["2025", "2026"]
+    processed_dir = "data/processed"
+    files = os.listdir(processed_dir)
+    pattern = re.compile(r"cleaned_daily_emissions_(\d{4})\.csv")
     
+    years = []
+    for filename in files:
+        match = pattern.match(filename)
+        if match:
+            years.append(match.group(1))
+            
+    years = sorted(years)
+    if not years:
+        print("No cleaned datasets found matching cleaned_daily_emissions_XXXX.csv")
+        return
+        
+    print(f"Found cleaned datasets to filter: {years}")
     os.makedirs("data/processed", exist_ok=True)
     
     for year in years:

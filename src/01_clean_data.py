@@ -9,14 +9,28 @@ def clean_column_name(col):
     return c.strip('_')
 
 def clean_data():
-    datasets = {
-        "2025": "data/raw/daily-emissions-f436a512-59f3-466a-9dd4-bc31cafbbb3a.csv",
-        "2026": "data/raw/daily-emissions-4f45cd74-73e6-4e8b-8f48-2ddd9fcf9d5d.csv"
-    }
+    raw_dir = "data/raw"
+    files = os.listdir(raw_dir)
+    pattern = re.compile(r"q1_(\d{4})\.csv")
+    
+    datasets = {}
+    for filename in files:
+        match = pattern.match(filename)
+        if match:
+            year = match.group(1)
+            datasets[year] = os.path.join(raw_dir, filename)
+            
+    if not datasets:
+        print("No raw datasets found matching q1_XXXX.csv inside data/raw/")
+        return
+        
+    years = sorted(list(datasets.keys()))
+    print(f"Found raw datasets to clean: {years}")
     
     os.makedirs("data/processed", exist_ok=True)
     
-    for year, filepath in datasets.items():
+    for year in years:
+        filepath = datasets[year]
         print(f"Loading {year} dataset: {filepath}...")
         df = pd.read_csv(filepath, low_memory=False)
         

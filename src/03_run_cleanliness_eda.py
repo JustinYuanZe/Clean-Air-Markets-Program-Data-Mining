@@ -1,4 +1,5 @@
 import os
+import re
 import pandas as pd
 import numpy as np
 import matplotlib
@@ -6,22 +7,34 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 def profile_cleanliness():
-    datasets = {
-        "2025": {
-            "raw": "data/raw/daily-emissions-f436a512-59f3-466a-9dd4-bc31cafbbb3a.csv",
-            "clean": "data/processed/cleaned_daily_emissions_2025.csv"
-        },
-        "2026": {
-            "raw": "data/raw/daily-emissions-4f45cd74-73e6-4e8b-8f48-2ddd9fcf9d5d.csv",
-            "clean": "data/processed/cleaned_daily_emissions_2026.csv"
-        }
-    }
+    raw_dir = "data/raw"
+    files = os.listdir(raw_dir)
+    pattern = re.compile(r"q1_(\d{4})\.csv")
     
+    datasets = {}
+    for filename in files:
+        match = pattern.match(filename)
+        if match:
+            year = match.group(1)
+            raw_path = os.path.join(raw_dir, filename)
+            clean_path = f"data/processed/cleaned_daily_emissions_{year}.csv"
+            if os.path.exists(clean_path):
+                datasets[year] = {
+                    "raw": raw_path,
+                    "clean": clean_path
+                }
+                
+    if not datasets:
+        print("No raw/cleaned dataset pairs found to profile.")
+        return
+        
+    years = sorted(list(datasets.keys()))
+    print(f"Found dataset pairs to profile: {years}")
     os.makedirs("reports/plots", exist_ok=True)
     
-    for year, paths in datasets.items():
-        raw_file = paths["raw"]
-        cleaned_file = paths["clean"]
+    for year in years:
+        raw_file = datasets[year]["raw"]
+        cleaned_file = datasets[year]["clean"]
         
         print(f"[{year}] Loading raw dataset: {raw_file}...")
         df_raw = pd.read_csv(raw_file, low_memory=False)
