@@ -1,0 +1,83 @@
+---
+title: "Clean Air Markets Program Daily Emissions"
+subtitle: "Data Mining & Environmental Analytics"
+author: "[Group Members / Student IDs]"
+date: today
+format:
+  pptx:
+    slide-level: 2
+    incremental: false
+  beamer:
+    pdf-engine: tectonic
+    aspectratio: 169
+    theme: Madrid
+    colortheme: whale
+---
+
+# 📌 Project Overview
+
+## Introduction
+- **Dataset**: Clean Air Markets Program daily emissions dataset (~340k records).
+- **Context**: Daily operational and emission metrics of power plants across the US.
+- **Goal**: Apply data mining methods (clustering, regression, classification) to evaluate plant efficiency and predict emissions.
+
+## Objectives
+1. **Data Preprocessing**: Standardize schemas and handle zero-emissions on idle days.
+2. **Predictive Modeling**: Forecast CO2 mass emissions from operational inputs.
+3. **Clustering**: Classify power plants into environmental impact profiles.
+
+---
+
+# 🧹 Data Preprocessing & Quality
+
+## Data Cleaning Stage
+- **Standardized Labels**: Converted column names to lower_snake_case (`gross_load_mwh`, `co2_mass_short_tons`).
+- **Null Imputation**:
+  - Filled missing categorical data with `'None'`.
+  - Filled missing numerical data with `0.0` (as blank spaces in generation/emissions denote an inactive day).
+
+## Filtering Active Days (Resolving Skewness)
+- Removed **193,156 idle days** where operating time was zero.
+- Drastically reduced statistical skewness:
+  - `gross_load_mwh` skewness reduced by **40.75%** (2.68 $\rightarrow$ 1.59).
+  - `co2_mass_short_tons` skewness reduced by **32.42%** (4.33 $\rightarrow$ 2.93).
+
+---
+
+# 📊 Exploratory Data Analysis (EDA)
+
+## Key Findings: Correlation
+- **CO2 & Heat Input**: Strong positive linear correlation ($r = 0.99$).
+- Carbon footprint is directly proportional to fuel heat energy input, regardless of plant technology.
+
+## Key Findings: Fuel Profiles
+- Coal units exhibit significantly higher SO2 and NOx averages per active operating day.
+- Natural Gas units represent a cleaner alternative with minimal SO2 trace.
+
+---
+
+# ⚙️ Data Mining Modeling
+
+## Regression Task
+- **Target Variable**: `co2_mass_short_tons`
+- **Predictors**: `heat_input_mmbtu`, `primary_fuel_type`, `unit_type`
+- **Models**:
+  - *Baseline*: Ordinary Least Squares (OLS) Linear Regression
+  - *Advanced*: Random Forest Regressor & XGBoost
+
+## Clustering / Profile Segmentation
+- **Features**: `so2_rate_lbs_mmbtu`, `nox_rate_lbs_mmbtu`, `co2_rate_short_tons_mmbtu`
+- **Goal**: Segment facilities into "Green", "Moderate", and "High-Emitter" clusters to guide policy compliance audits.
+
+---
+
+# 🏁 Conclusion & Next Steps
+
+## Project Takeaways
+- Restructured data layout into professional format (`src/`, `data/`, `reports/`).
+- Resolved massive data skewness caused by plant shutdowns.
+- Established baseline linear relations for emissions prediction.
+
+## Future Scope
+- Test deep learning models (Neural Networks) for non-linear rates.
+- Deploy an interactive dashboard to monitor plant-level behaviors.
