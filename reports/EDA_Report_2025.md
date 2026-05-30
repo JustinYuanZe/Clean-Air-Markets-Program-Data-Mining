@@ -5,7 +5,7 @@ This report provides a detailed exploratory analysis of the cleaned and filtered
 ## 1. Dataset Overview
 
 - **Total Rows**: 148394
-- **Total Columns**: 25
+- **Total Columns**: 20
 
 | Feature Label | Data Type | Non-Null Count | Null Count | Unique Count |
 | :--- | :--- | :--- | :--- | :--- |
@@ -13,12 +13,10 @@ This report provides a detailed exploratory analysis of the cleaned and filtered
 | `facility_name` | str | 148394 | 0 | 1204 |
 | `facility_id` | int64 | 148394 | 0 | 1205 |
 | `unit_id` | str | 148394 | 0 | 1218 |
-| `associated_stacks` | str | 13869 | 134525 | 72 |
 | `date` | str | 148394 | 0 | 90 |
 | `operating_time_count` | int64 | 148394 | 0 | 24 |
 | `sum_of_the_operating_time` | float64 | 148394 | 0 | 2383 |
 | `gross_load_mwh` | float64 | 148394 | 0 | 57397 |
-| `steam_load_1000_lb` | float64 | 148394 | 0 | 6925 |
 | `so2_mass_short_tons` | float64 | 148394 | 0 | 12435 |
 | `so2_rate_lbs_mmbtu` | float64 | 148394 | 0 | 5717 |
 | `co2_mass_short_tons` | float64 | 148394 | 0 | 100376 |
@@ -29,10 +27,7 @@ This report provides a detailed exploratory analysis of the cleaned and filtered
 | `primary_fuel_type` | str | 148394 | 0 | 13 |
 | `secondary_fuel_type` | str | 50708 | 97686 | 38 |
 | `unit_type` | str | 148394 | 0 | 16 |
-| `so2_controls` | str | 23418 | 124976 | 13 |
 | `nox_controls` | str | 140467 | 7927 | 114 |
-| `pm_controls` | str | 29229 | 119165 | 24 |
-| `hg_controls` | str | 11701 | 136693 | 16 |
 | `program_code` | str | 148394 | 0 | 57 |
 
 ## 2. Descriptive Statistics (Numerical Columns)
@@ -41,7 +36,6 @@ This report provides a detailed exploratory analysis of the cleaned and filtered
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | `sum_of_the_operating_time` | 18.27 | 8.31 | 0.01 | 10.92 | 24.00 | 24.00 | 24.00 | 24.00 | 24.00 | 24.00 | -1.02 | -0.64 | 6.90e+01 |
 | `gross_load_mwh` | 4038.23 | 4306.55 | 0.00 | 388.85 | 2876.00 | 6213.00 | 9748.00 | 12627.35 | 18214.07 | 35108.00 | 1.59 | 3.77 | 1.85e+07 |
-| `steam_load_1000_lb` | 493.27 | 3100.81 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 2002.35 | 10536.28 | 66614.00 | 10.71 | 141.36 | 9.62e+06 |
 | `so2_mass_short_tons` | 1.24 | 4.81 | 0.00 | 0.00 | 0.01 | 0.02 | 2.78 | 7.26 | 26.86 | 86.31 | 6.37 | 51.30 | 2.32e+01 |
 | `so2_rate_lbs_mmbtu` | 0.04 | 0.32 | 0.00 | 0.00 | 0.00 | 0.00 | 0.10 | 0.21 | 0.56 | 74.20 | 153.62 | 31157.27 | 9.99e-02 |
 | `co2_mass_short_tons` | 2670.27 | 3761.97 | 0.00 | 308.86 | 1751.35 | 2878.07 | 6487.04 | 11578.38 | 18002.99 | 67582.10 | 2.93 | 11.14 | 1.42e+07 |
