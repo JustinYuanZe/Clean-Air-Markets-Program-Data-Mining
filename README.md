@@ -29,16 +29,16 @@ To reproduce the cleaning, filtering, and EDA reports, run the scripts in their 
 
 ```bash
 # Step 1: Parse, clean, and resolve nulls in raw CSV
-python 01_clean_data.py
+python src/01_clean_data.py
 
 # Step 2: Extract active operation periods to resolve zero-skewness
-python 02_filter_active_data.py
+python src/02_filter_active_data.py
 
 # Step 3: Run comparative data cleanliness profiling
-python 03_run_cleanliness_eda.py
+python src/03_run_cleanliness_eda.py
 
 # Step 4: Perform detailed EDA, statistics, and correlation plots
-python 04_run_eda.py
+python src/04_run_eda.py
 ```
 
 ---
