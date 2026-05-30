@@ -1,8 +1,8 @@
-# Data Cleanliness & Profiling Report (Before vs After)
+# Data Cleanliness (Before vs After)
 
-This report provides a detailed comparison of the data quality (cleanliness) of the raw daily emissions dataset versus the cleaned dataset.
+This report provides a comparison of the data quality (cleanliness) of the raw daily emissions dataset versus the cleaned dataset.
 
-## 1. Cleanliness Audit Summary Table
+## 1. Cleanliness Summary Table
 
 | Idx | Raw Feature Label | Raw Dtype | Raw Nulls (Count) | Raw Nulls (%) | Cleaned Feature Label | Cleaned Dtype | Cleaned Nulls (Count) | Cleaned Nulls (%) |
 | :---: | :--- | :--- | :---: | :---: | :--- | :--- | :---: | :---: |
@@ -46,8 +46,8 @@ This report provides a detailed comparison of the data quality (cleanliness) of 
 
 ### Data Quality Enhancements Applied:
 
-1. **Zero Null Values**: All missing values have been programmatically resolved to `'None'` for categoricals and `0.0` for numericals.
-2. **Standardized Column Schemas**: Columns converted to lowercase snake_case (e.g., `gross_load_mwh`).
+1. **Zero Null Values**: All missing values have been converted to `'None'` for categoricals and `0.0` for numericals.
+2. **Standardized Column**: Columns converted to lowercase snake_case (e.g., `gross_load_mwh`).
 3. **Datatype Consistency**: Enforced explicit numeric/string formats.
 
 ## 4. Visual Comparison of Missing Values
