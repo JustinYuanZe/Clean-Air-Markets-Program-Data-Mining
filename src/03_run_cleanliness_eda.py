@@ -5,6 +5,11 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+def clean_column_name(col):
+    c = col.strip().lower()
+    c = re.sub(r'[^\w\s]', '_', c)
+    c = re.sub(r'[\s_]+', '_', c)
+    return c.strip('_')
 
 def profile_cleanliness():
     raw_dir = "data/raw"
@@ -54,22 +59,35 @@ def profile_cleanliness():
         clean_null_pcts = (clean_null_counts / clean_n_rows) * 100
         clean_dtypes = df_clean.dtypes
         
-        # 3. Create comparison
+        # 3. Create comparison matching raw columns to cleaned columns
         null_comparison = []
-        for idx in range(len(df_raw.columns)):
-            raw_col = df_raw.columns[idx]
-            clean_col = df_clean.columns[idx]
+        for idx, raw_col in enumerate(df_raw.columns):
+            expected_clean_col = clean_column_name(raw_col)
             
+            if expected_clean_col in df_clean.columns:
+                cleaned_feature = expected_clean_col
+                cleaned_null_count = clean_null_counts[expected_clean_col]
+                cleaned_null_pct = clean_null_pcts[expected_clean_col]
+                cleaned_dtype = str(clean_dtypes[expected_clean_col])
+                is_dropped = False
+            else:
+                cleaned_feature = f"{expected_clean_col} (Dropped)"
+                cleaned_null_count = np.nan
+                cleaned_null_pct = np.nan
+                cleaned_dtype = "N/A"
+                is_dropped = True
+                
             null_comparison.append({
                 'index': idx,
                 'raw_feature': raw_col,
                 'raw_null_count': raw_null_counts[raw_col],
                 'raw_null_pct': raw_null_pcts[raw_col],
                 'raw_dtype': str(raw_dtypes[raw_col]),
-                'cleaned_feature': clean_col,
-                'cleaned_null_count': clean_null_counts[clean_col],
-                'cleaned_null_pct': clean_null_pcts[clean_col],
-                'cleaned_dtype': str(clean_dtypes[clean_col])
+                'cleaned_feature': cleaned_feature,
+                'cleaned_null_count': cleaned_null_count,
+                'cleaned_null_pct': cleaned_null_pct,
+                'cleaned_dtype': cleaned_dtype,
+                'is_dropped': is_dropped
             })
         df_compare = pd.DataFrame(null_comparison)
         
@@ -102,7 +120,17 @@ def profile_cleanliness():
             f.write("| Idx | Raw Feature Label | Raw Dtype | Raw Nulls (Count) | Raw Nulls (%) | Cleaned Feature Label | Cleaned Dtype | Cleaned Nulls (Count) | Cleaned Nulls (%) |\n")
             f.write("| :---: | :--- | :--- | :---: | :---: | :--- | :--- | :---: | :---: |\n")
             for _, row in df_compare.iterrows():
-                f.write(f"| {row['index']} | `{row['raw_feature']}` | {row['raw_dtype']} | {row['raw_null_count']:,} | {row['raw_null_pct']:.2f}% | `{row['cleaned_feature']}` | {row['cleaned_dtype']} | {row['cleaned_null_count']:,} | {row['cleaned_null_pct']:.2f}% |\n")
+                raw_nulls_count = f"{int(row['raw_null_count']):,}"
+                raw_nulls_pct = f"{row['raw_null_pct']:.2f}%"
+                
+                if pd.isna(row['cleaned_null_count']):
+                    clean_nulls_count = "N/A"
+                    clean_nulls_pct = "N/A"
+                else:
+                    clean_nulls_count = f"{int(row['cleaned_null_count']):,}"
+                    clean_nulls_pct = f"{row['cleaned_null_pct']:.2f}%"
+                    
+                f.write(f"| {row['index']} | `{row['raw_feature']}` | {row['raw_dtype']} | {raw_nulls_count} | {raw_nulls_pct} | `{row['cleaned_feature']}` | {row['cleaned_dtype']} | {clean_nulls_count} | {clean_nulls_pct} |\n")
             f.write("\n")
             f.write("## 2. Detailed Profiling: The Raw Dataset (Before Cleaning)\n\n")
             f.write("### Data Quality Issues Detected:\n\n")
