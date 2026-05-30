@@ -14,7 +14,10 @@
 ---
 
 ## 1. Repository Overview
-This repository contains the data mining process and **Clean Air Markets Program daily emissions dataset** for the first quarter in 2025(~340,000 records) and 2026. 
+This repository contains the data mining process and **Clean Air Markets Program daily emissions dataset** for the first quarter in 2024, 2025 and 2026
+
+URL: https://campd.epa.gov/data/custom-data-download
+By choosing the data type, period, and others features, you can download the raw CSV files for each year.
 
 Our objective is to process a clean dataset, avoiding the inactive operating periods to prevent skewness(NaN, Not Applicable, Not Available,...). And applying some techniques data mining and machine learning to evaluate and analyze the this dataset.
 
