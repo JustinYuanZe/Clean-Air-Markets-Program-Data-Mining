@@ -1,6 +1,6 @@
 # Exploratory Data Analysis (EDA) Report (2025)
 
-This report provides a detailed exploratory analysis of the cleaned and filtered daily emissions dataset containing active rows only for the year 2025.
+This report provides a detailed exploratory analysis of the cleaned and filtered daily emissions dataset containing active rows only for the year 2025. Visual scales are dynamically aligned across all years to support visual comparison.
 
 ## 1. Dataset Overview
 
@@ -145,14 +145,18 @@ This report provides a detailed exploratory analysis of the cleaned and filtered
 | Integrated gasification combined cycle (Ended Jun 07, 2025), Combustion turbine (Started Jun 07, 2025) | 8.0 | 0.01% |
 | Other turbine | 5.0 | 0.00% |
 
-## 4. Visualizations & Interpretations
+## 4. Visualizations & Interpretations (Unified Scaling Enforced)
 
 ### A. Pearson Correlation Heatmap
 ![Pearson Correlation Heatmap](plots/correlation_matrix_2025.png)
 
 ### B. Emissions Profile by Fuel Type
+This bar chart displays the mean emissions grouped by fuel. To avoid visual comparison distortion, the x-axis scale has been locked to a clean, rounded global maximum limit of: CO2=10000, SO2=12.0, NOx=10.0 short tons.
+
 ![Emissions Profile by Fuel Type](plots/emissions_by_fuel_2025.png)
 
 ### C. Gross Load vs Heat Input density
+This operational density hexbin plot has shared X-axis limits (0 to 1000000 mmBtu), Y-axis limits (0 to 50000 MWh), and colorbar limits (0 to 28785.0 observation count) to allow clear visualization of operational efficiency and density shifts.
+
 ![Gross Load vs Heat Input](plots/gross_load_vs_heat_input_2025.png)
 
