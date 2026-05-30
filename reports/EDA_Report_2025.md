@@ -151,7 +151,7 @@ This report provides a detailed exploratory analysis of the cleaned and filtered
 ![Pearson Correlation Heatmap](plots/correlation_matrix_2025.png)
 
 ### B. Emissions Profile by Fuel Type
-This bar chart displays the mean emissions grouped by fuel. To avoid visual comparison distortion, the x-axis scale has been locked to a clean, rounded global maximum limit of: CO2=10000, SO2=12.0, NOx=10.0 short tons.
+This bar chart displays the mean emissions grouped by fuel. To avoid visual comparison distortion, the x-axis scale has been locked to a clean, rounded global maximum limit of: CO2=12000, SO2=12.0, NOx=10.0 short tons.
 
 ![Emissions Profile by Fuel Type](plots/emissions_by_fuel_2025.png)
 
