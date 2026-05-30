@@ -120,10 +120,11 @@ def run_eda():
             columns_info.append((col, dtype, non_null, null_count, unique_vals))
         
         # B. Descriptive statistics
-        desc_stats = df[num_cols].describe(percentiles=[.25, .5, .75, .9, .95, .99]).T
-        desc_stats['skewness'] = df[num_cols].skew()
-        desc_stats['kurtosis'] = df[num_cols].kurt()
-        desc_stats['variance'] = df[num_cols].var()
+        df_num_cols = [c for c in num_cols if c in df.columns]
+        desc_stats = df[df_num_cols].describe(percentiles=[.25, .5, .75, .9, .95, .99]).T
+        desc_stats['skewness'] = df[df_num_cols].skew()
+        desc_stats['kurtosis'] = df[df_num_cols].kurt()
+        desc_stats['variance'] = df[df_num_cols].var()
         
         # C. Categorical distributions
         cat_cols = ['state', 'primary_fuel_type', 'unit_type']
@@ -134,7 +135,7 @@ def run_eda():
             cat_stats[col] = pd.DataFrame({'count': counts, 'percentage': pcts})
             
         # D. Correlation Matrix
-        corr_matrix = df[num_cols].corr()
+        corr_matrix = df[df_num_cols].corr()
         
         # E. Visualizations
         print(f"[{year}] Saving plots...")
@@ -145,14 +146,14 @@ def run_eda():
         cax = ax.matshow(corr_matrix, cmap='coolwarm', vmin=-1, vmax=1)
         fig.colorbar(cax)
         
-        ticks = np.arange(0, len(num_cols), 1)
+        ticks = np.arange(0, len(df_num_cols), 1)
         ax.set_xticks(ticks)
         ax.set_yticks(ticks)
-        ax.set_xticklabels(num_cols, rotation=45, ha='left', fontsize=8)
-        ax.set_yticklabels(num_cols, fontsize=8)
+        ax.set_xticklabels(df_num_cols, rotation=45, ha='left', fontsize=8)
+        ax.set_yticklabels(df_num_cols, fontsize=8)
         
-        for i in range(len(num_cols)):
-            for j in range(len(num_cols)):
+        for i in range(len(df_num_cols)):
+            for j in range(len(df_num_cols)):
                 ax.text(j, i, f"{corr_matrix.iloc[i, j]:.2f}", ha='center', va='center', color='black', fontsize=8)
                 
         plt.title(f"{year} Pearson Correlation Matrix", y=1.15, fontsize=14, fontweight='bold')
