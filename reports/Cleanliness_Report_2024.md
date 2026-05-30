@@ -10,12 +10,12 @@ This report provides a detailed comparison of the data quality (cleanliness) of 
 | 1 | `Facility Name` | str | 0 | 0.00% | `facility_name` | str | 0 | 0.00% |
 | 2 | `Facility ID` | int64 | 0 | 0.00% | `facility_id` | int64 | 0 | 0.00% |
 | 3 | `Unit ID` | str | 0 | 0.00% | `unit_id` | str | 0 | 0.00% |
-| 4 | `Associated Stacks` | str | 311,311 | 89.00% | `associated_stacks` | str | 0 | 0.00% |
+| 4 | `Associated Stacks` | str | 311,311 | 89.00% | `associated_stacks (Dropped)` | N/A | N/A | N/A |
 | 5 | `Date` | str | 0 | 0.00% | `date` | str | 0 | 0.00% |
 | 6 | `Operating Time Count` | int64 | 0 | 0.00% | `operating_time_count` | int64 | 0 | 0.00% |
 | 7 | `Sum of the Operating Time` | float64 | 264 | 0.08% | `sum_of_the_operating_time` | float64 | 0 | 0.00% |
 | 8 | `Gross Load (MWh)` | float64 | 214,812 | 61.41% | `gross_load_mwh` | float64 | 0 | 0.00% |
-| 9 | `Steam Load (1000 lb)` | float64 | 340,650 | 97.38% | `steam_load_1000_lb` | float64 | 0 | 0.00% |
+| 9 | `Steam Load (1000 lb)` | float64 | 340,650 | 97.38% | `steam_load_1000_lb (Dropped)` | N/A | N/A | N/A |
 | 10 | `SO2 Mass (short tons)` | float64 | 213,362 | 60.99% | `so2_mass_short_tons` | float64 | 0 | 0.00% |
 | 11 | `SO2 Rate (lbs/mmBtu)` | float64 | 213,430 | 61.01% | `so2_rate_lbs_mmbtu` | float64 | 0 | 0.00% |
 | 12 | `CO2 Mass (short tons)` | float64 | 214,190 | 61.23% | `co2_mass_short_tons` | float64 | 0 | 0.00% |
@@ -26,10 +26,10 @@ This report provides a detailed comparison of the data quality (cleanliness) of 
 | 17 | `Primary Fuel Type` | str | 91 | 0.03% | `primary_fuel_type` | str | 0 | 0.00% |
 | 18 | `Secondary Fuel Type` | str | 218,673 | 62.51% | `secondary_fuel_type` | str | 0 | 0.00% |
 | 19 | `Unit Type` | str | 0 | 0.00% | `unit_type` | str | 0 | 0.00% |
-| 20 | `SO2 Controls` | str | 315,315 | 90.14% | `so2_controls` | str | 0 | 0.00% |
+| 20 | `SO2 Controls` | str | 315,315 | 90.14% | `so2_controls (Dropped)` | N/A | N/A | N/A |
 | 21 | `NOx Controls` | str | 44,044 | 12.59% | `nox_controls` | str | 0 | 0.00% |
-| 22 | `PM Controls` | str | 303,758 | 86.84% | `pm_controls` | str | 0 | 0.00% |
-| 23 | `Hg Controls` | str | 333,697 | 95.40% | `hg_controls` | str | 0 | 0.00% |
+| 22 | `PM Controls` | str | 303,758 | 86.84% | `pm_controls (Dropped)` | N/A | N/A | N/A |
+| 23 | `Hg Controls` | str | 333,697 | 95.40% | `hg_controls (Dropped)` | N/A | N/A | N/A |
 | 24 | `Program Code` | str | 1,274 | 0.36% | `program_code` | str | 0 | 0.00% |
 
 ## 2. Detailed Profiling: The Raw Dataset (Before Cleaning)
